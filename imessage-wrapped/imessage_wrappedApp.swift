@@ -11,7 +11,7 @@ import SwiftUI
 struct imessage_wrappedApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContactsView()
         }
     }
 }
