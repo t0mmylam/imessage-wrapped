@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		135EAB3C2A54BDD200152EF8 /* imessage_wrappedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */; };
+		135EAB3E2A54BDD200152EF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB3D2A54BDD200152EF8 /* ContentView.swift */; };
+		135EAB402A54BDD300152EF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB3F2A54BDD300152EF8 /* Assets.xcassets */; };
+		135EAB432A54BDD300152EF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB422A54BDD300152EF8 /* Preview Assets.xcassets */; };
+		135EAB4E2A54BDD300152EF8 /* imessage_wrappedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB4D2A54BDD300152EF8 /* imessage_wrappedTests.swift */; };
+		135EAB582A54BDD300152EF8 /* imessage_wrappedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB572A54BDD300152EF8 /* imessage_wrappedUITests.swift */; };
+		135EAB5A2A54BDD300152EF8 /* imessage_wrappedUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB592A54BDD300152EF8 /* imessage_wrappedUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		135EAB4A2A54BDD300152EF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 135EAB302A54BDD200152EF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 135EAB372A54BDD200152EF8;
+			remoteInfo = "imessage-wrapped";
+		};
+		135EAB542A54BDD300152EF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 135EAB302A54BDD200152EF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 135EAB372A54BDD200152EF8;
+			remoteInfo = "imessage-wrapped";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		135EAB382A54BDD200152EF8 /* imessage-wrapped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "imessage-wrapped.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imessage_wrappedApp.swift; sourceTree = "<group>"; };
+		135EAB3D2A54BDD200152EF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		135EAB3F2A54BDD300152EF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		135EAB422A54BDD300152EF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		135EAB442A54BDD300152EF8 /* imessage_wrapped.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = imessage_wrapped.entitlements; sourceTree = "<group>"; };
+		135EAB492A54BDD300152EF8 /* imessage-wrappedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "imessage-wrappedTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		135EAB4D2A54BDD300152EF8 /* imessage_wrappedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imessage_wrappedTests.swift; sourceTree = "<group>"; };
+		135EAB532A54BDD300152EF8 /* imessage-wrappedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "imessage-wrappedUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		135EAB572A54BDD300152EF8 /* imessage_wrappedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imessage_wrappedUITests.swift; sourceTree = "<group>"; };
+		135EAB592A54BDD300152EF8 /* imessage_wrappedUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imessage_wrappedUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		135EAB352A54BDD200152EF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		135EAB462A54BDD300152EF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		135EAB502A54BDD300152EF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		135EAB2F2A54BDD200152EF8 = {
+			isa = PBXGroup;
+			children = (
+				135EAB3A2A54BDD200152EF8 /* imessage-wrapped */,
+				135EAB4C2A54BDD300152EF8 /* imessage-wrappedTests */,
+				135EAB562A54BDD300152EF8 /* imessage-wrappedUITests */,
+				135EAB392A54BDD200152EF8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		135EAB392A54BDD200152EF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				135EAB382A54BDD200152EF8 /* imessage-wrapped.app */,
+				135EAB492A54BDD300152EF8 /* imessage-wrappedTests.xctest */,
+				135EAB532A54BDD300152EF8 /* imessage-wrappedUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		135EAB3A2A54BDD200152EF8 /* imessage-wrapped */ = {
+			isa = PBXGroup;
+			children = (
+				135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */,
+				135EAB3D2A54BDD200152EF8 /* ContentView.swift */,
+				135EAB3F2A54BDD300152EF8 /* Assets.xcassets */,
+				135EAB442A54BDD300152EF8 /* imessage_wrapped.entitlements */,
+				135EAB412A54BDD300152EF8 /* Preview Content */,
+			);
+			path = "imessage-wrapped";
+			sourceTree = "<group>";
+		};
+		135EAB412A54BDD300152EF8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				135EAB422A54BDD300152EF8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		135EAB4C2A54BDD300152EF8 /* imessage-wrappedTests */ = {
+			isa = PBXGroup;
+			children = (
+				135EAB4D2A54BDD300152EF8 /* imessage_wrappedTests.swift */,
+			);
+			path = "imessage-wrappedTests";
+			sourceTree = "<group>";
+		};
+		135EAB562A54BDD300152EF8 /* imessage-wrappedUITests */ = {
+			isa = PBXGroup;
+			children = (
+				135EAB572A54BDD300152EF8 /* imessage_wrappedUITests.swift */,
+				135EAB592A54BDD300152EF8 /* imessage_wrappedUITestsLaunchTests.swift */,
+			);
+			path = "imessage-wrappedUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		135EAB372A54BDD200152EF8 /* imessage-wrapped */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 135EAB5D2A54BDD300152EF8 /* Build configuration list for PBXNativeTarget "imessage-wrapped" */;
+			buildPhases = (
+				135EAB342A54BDD200152EF8 /* Sources */,
+				135EAB352A54BDD200152EF8 /* Frameworks */,
+				135EAB362A54BDD200152EF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "imessage-wrapped";
+			productName = "imessage-wrapped";
+			productReference = 135EAB382A54BDD200152EF8 /* imessage-wrapped.app */;
+			productType = "com.apple.product-type.application";
+		};
+		135EAB482A54BDD300152EF8 /* imessage-wrappedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 135EAB602A54BDD300152EF8 /* Build configuration list for PBXNativeTarget "imessage-wrappedTests" */;
+			buildPhases = (
+				135EAB452A54BDD300152EF8 /* Sources */,
+				135EAB462A54BDD300152EF8 /* Frameworks */,
+				135EAB472A54BDD300152EF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				135EAB4B2A54BDD300152EF8 /* PBXTargetDependency */,
+			);
+			name = "imessage-wrappedTests";
+			productName = "imessage-wrappedTests";
+			productReference = 135EAB492A54BDD300152EF8 /* imessage-wrappedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		135EAB522A54BDD300152EF8 /* imessage-wrappedUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 135EAB632A54BDD300152EF8 /* Build configuration list for PBXNativeTarget "imessage-wrappedUITests" */;
+			buildPhases = (
+				135EAB4F2A54BDD300152EF8 /* Sources */,
+				135EAB502A54BDD300152EF8 /* Frameworks */,
+				135EAB512A54BDD300152EF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				135EAB552A54BDD300152EF8 /* PBXTargetDependency */,
+			);
+			name = "imessage-wrappedUITests";
+			productName = "imessage-wrappedUITests";
+			productReference = 135EAB532A54BDD300152EF8 /* imessage-wrappedUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		135EAB302A54BDD200152EF8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					135EAB372A54BDD200152EF8 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					135EAB482A54BDD300152EF8 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 135EAB372A54BDD200152EF8;
+					};
+					135EAB522A54BDD300152EF8 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 135EAB372A54BDD200152EF8;
+					};
+				};
+			};
+			buildConfigurationList = 135EAB332A54BDD200152EF8 /* Build configuration list for PBXProject "imessage-wrapped" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 135EAB2F2A54BDD200152EF8;
+			productRefGroup = 135EAB392A54BDD200152EF8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				135EAB372A54BDD200152EF8 /* imessage-wrapped */,
+				135EAB482A54BDD300152EF8 /* imessage-wrappedTests */,
+				135EAB522A54BDD300152EF8 /* imessage-wrappedUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		135EAB362A54BDD200152EF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				135EAB432A54BDD300152EF8 /* Preview Assets.xcassets in Resources */,
+				135EAB402A54BDD300152EF8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		135EAB472A54BDD300152EF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		135EAB512A54BDD300152EF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		135EAB342A54BDD200152EF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				135EAB3E2A54BDD200152EF8 /* ContentView.swift in Sources */,
+				135EAB3C2A54BDD200152EF8 /* imessage_wrappedApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		135EAB452A54BDD300152EF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				135EAB4E2A54BDD300152EF8 /* imessage_wrappedTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		135EAB4F2A54BDD300152EF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				135EAB5A2A54BDD300152EF8 /* imessage_wrappedUITestsLaunchTests.swift in Sources */,
+				135EAB582A54BDD300152EF8 /* imessage_wrappedUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		135EAB4B2A54BDD300152EF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 135EAB372A54BDD200152EF8 /* imessage-wrapped */;
+			targetProxy = 135EAB4A2A54BDD300152EF8 /* PBXContainerItemProxy */;
+		};
+		135EAB552A54BDD300152EF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 135EAB372A54BDD200152EF8 /* imessage-wrapped */;
+			targetProxy = 135EAB542A54BDD300152EF8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		135EAB5B2A54BDD300152EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		135EAB5C2A54BDD300152EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		135EAB5E2A54BDD300152EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "imessage-wrapped/imessage_wrapped.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"imessage-wrapped/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thomaslam.imessage-wrapped";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		135EAB5F2A54BDD300152EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "imessage-wrapped/imessage_wrapped.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"imessage-wrapped/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thomaslam.imessage-wrapped";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		135EAB612A54BDD300152EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thomaslam.imessage-wrappedTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/imessage-wrapped.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/imessage-wrapped";
+			};
+			name = Debug;
+		};
+		135EAB622A54BDD300152EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thomaslam.imessage-wrappedTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/imessage-wrapped.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/imessage-wrapped";
+			};
+			name = Release;
+		};
+		135EAB642A54BDD300152EF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thomaslam.imessage-wrappedUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "imessage-wrapped";
+			};
+			name = Debug;
+		};
+		135EAB652A54BDD300152EF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thomaslam.imessage-wrappedUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "imessage-wrapped";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		135EAB332A54BDD200152EF8 /* Build configuration list for PBXProject "imessage-wrapped" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				135EAB5B2A54BDD300152EF8 /* Debug */,
+				135EAB5C2A54BDD300152EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		135EAB5D2A54BDD300152EF8 /* Build configuration list for PBXNativeTarget "imessage-wrapped" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				135EAB5E2A54BDD300152EF8 /* Debug */,
+				135EAB5F2A54BDD300152EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		135EAB602A54BDD300152EF8 /* Build configuration list for PBXNativeTarget "imessage-wrappedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				135EAB612A54BDD300152EF8 /* Debug */,
+				135EAB622A54BDD300152EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		135EAB632A54BDD300152EF8 /* Build configuration list for PBXNativeTarget "imessage-wrappedUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				135EAB642A54BDD300152EF8 /* Debug */,
+				135EAB652A54BDD300152EF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 135EAB302A54BDD200152EF8 /* Project object */;
+}
