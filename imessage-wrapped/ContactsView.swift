@@ -22,6 +22,8 @@ struct ContactsView: View {
         }
         .onAppear {
             requestContactsAccess()
+            let db = Database()
+            db.printDbPath()
         }
     }
 
@@ -43,7 +45,13 @@ struct ContactsView: View {
 
         do {
             try store.enumerateContacts(with: fetchRequest) { (contact, stop) in
-                self.contacts.append(contact)
+                for phoneNumber in contact.phoneNumbers {
+                    if let number = phoneNumber.value.value(forKey: "digits") as? String,
+                        number == "+17038685609" {
+                        self.contacts.append(contact)
+                        break
+                    }
+                }
             }
         } catch {
             print("Failed to fetch contacts: \(error.localizedDescription)")
