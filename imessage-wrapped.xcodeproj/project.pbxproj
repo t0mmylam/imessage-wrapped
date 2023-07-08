@@ -11,8 +11,8 @@
 		132E00012A55ED9400619379 /* chat.db in Resources */ = {isa = PBXBuildFile; fileRef = 132E00002A55ED9400619379 /* chat.db */; };
 		132EFFFB2A55DDAB00619379 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132EFFFA2A55DDAB00619379 /* Database.swift */; };
 		132EFFFD2A55E2B800619379 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132EFFFC2A55E2B800619379 /* Config.swift */; };
+		133AAD8A2A5A143900FD9689 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133AAD892A5A143900FD9689 /* PermissionsView.swift */; };
 		135EAB3C2A54BDD200152EF8 /* imessage_wrappedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */; };
-		135EAB3E2A54BDD200152EF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB3D2A54BDD200152EF8 /* ContentView.swift */; };
 		135EAB402A54BDD300152EF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB3F2A54BDD300152EF8 /* Assets.xcassets */; };
 		135EAB432A54BDD300152EF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB422A54BDD300152EF8 /* Preview Assets.xcassets */; };
 		135EAB672A54BE2E00152EF8 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB662A54BE2E00152EF8 /* ContactsView.swift */; };
@@ -40,9 +40,9 @@
 		132E00002A55ED9400619379 /* chat.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = chat.db; sourceTree = SOURCE_ROOT; };
 		132EFFFA2A55DDAB00619379 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		132EFFFC2A55E2B800619379 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		133AAD892A5A143900FD9689 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		135EAB382A54BDD200152EF8 /* imessage-wrapped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "imessage-wrapped.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imessage_wrappedApp.swift; sourceTree = "<group>"; };
-		135EAB3D2A54BDD200152EF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		135EAB3F2A54BDD300152EF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		135EAB422A54BDD300152EF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		135EAB442A54BDD300152EF8 /* imessage_wrapped.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = imessage_wrapped.entitlements; sourceTree = "<group>"; };
@@ -102,13 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */,
-				135EAB3D2A54BDD200152EF8 /* ContentView.swift */,
 				135EAB3F2A54BDD300152EF8 /* Assets.xcassets */,
 				135EAB442A54BDD300152EF8 /* imessage_wrapped.entitlements */,
 				135EAB662A54BE2E00152EF8 /* ContactsView.swift */,
 				135EAB412A54BDD300152EF8 /* Preview Content */,
 				132EFFFA2A55DDAB00619379 /* Database.swift */,
 				132EFFFC2A55E2B800619379 /* Config.swift */,
+				133AAD892A5A143900FD9689 /* PermissionsView.swift */,
 			);
 			path = "imessage-wrapped";
 			sourceTree = "<group>";
@@ -260,7 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				135EAB672A54BE2E00152EF8 /* ContactsView.swift in Sources */,
-				135EAB3E2A54BDD200152EF8 /* ContentView.swift in Sources */,
+				133AAD8A2A5A143900FD9689 /* PermissionsView.swift in Sources */,
 				132EFFFD2A55E2B800619379 /* Config.swift in Sources */,
 				132EFFFB2A55DDAB00619379 /* Database.swift in Sources */,
 				135EAB3C2A54BDD200152EF8 /* imessage_wrappedApp.swift in Sources */,

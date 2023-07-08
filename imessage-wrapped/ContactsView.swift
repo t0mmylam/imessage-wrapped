@@ -58,6 +58,7 @@ struct ContactsView: View {
                 Text("Total Message Count: \(viewModel.totalMessageCount)")
                     .font(.title)
                     .fontWeight(.bold)
+
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 16)], spacing: 16) {
                     ForEach(viewModel.contacts, id: \.contact.identifier) { contact in
                         VStack(spacing: 8) {
@@ -92,7 +93,8 @@ struct ContactsView: View {
         }
         .navigationTitle("iMessage Wrapped")
         .onAppear {
-            viewModel.loadContacts()
+                viewModel.loadContacts()
         }
     }
 }
+
