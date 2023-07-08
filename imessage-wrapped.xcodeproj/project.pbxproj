@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		131743A02A55CEEE00FFCE4D /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 1317439F2A55CEEE00FFCE4D /* SQLite */; };
+		132E00012A55ED9400619379 /* chat.db in Resources */ = {isa = PBXBuildFile; fileRef = 132E00002A55ED9400619379 /* chat.db */; };
 		132EFFFB2A55DDAB00619379 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132EFFFA2A55DDAB00619379 /* Database.swift */; };
 		132EFFFD2A55E2B800619379 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132EFFFC2A55E2B800619379 /* Config.swift */; };
-		132EFFFF2A55E45000619379 /* chat.db in Resources */ = {isa = PBXBuildFile; fileRef = 132EFFFE2A55E45000619379 /* chat.db */; };
 		135EAB3C2A54BDD200152EF8 /* imessage_wrappedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */; };
 		135EAB3E2A54BDD200152EF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB3D2A54BDD200152EF8 /* ContentView.swift */; };
 		135EAB402A54BDD300152EF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB3F2A54BDD300152EF8 /* Assets.xcassets */; };
@@ -37,9 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		132E00002A55ED9400619379 /* chat.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = chat.db; sourceTree = SOURCE_ROOT; };
 		132EFFFA2A55DDAB00619379 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		132EFFFC2A55E2B800619379 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		132EFFFE2A55E45000619379 /* chat.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = chat.db; path = ../../chat.db; sourceTree = "<group>"; };
 		135EAB382A54BDD200152EF8 /* imessage-wrapped.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "imessage-wrapped.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		135EAB3B2A54BDD200152EF8 /* imessage_wrappedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imessage_wrappedApp.swift; sourceTree = "<group>"; };
 		135EAB3D2A54BDD200152EF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 		135EAB2F2A54BDD200152EF8 = {
 			isa = PBXGroup;
 			children = (
-				132EFFFE2A55E45000619379 /* chat.db */,
+				132E00002A55ED9400619379 /* chat.db */,
 				135EAB682A54BE6F00152EF8 /* Info.plist */,
 				135EAB3A2A54BDD200152EF8 /* imessage-wrapped */,
 				135EAB392A54BDD200152EF8 /* Products */,
@@ -106,8 +106,8 @@
 				135EAB3F2A54BDD300152EF8 /* Assets.xcassets */,
 				135EAB442A54BDD300152EF8 /* imessage_wrapped.entitlements */,
 				135EAB662A54BE2E00152EF8 /* ContactsView.swift */,
-				132EFFFA2A55DDAB00619379 /* Database.swift */,
 				135EAB412A54BDD300152EF8 /* Preview Content */,
+				132EFFFA2A55DDAB00619379 /* Database.swift */,
 				132EFFFC2A55E2B800619379 /* Config.swift */,
 			);
 			path = "imessage-wrapped";
@@ -234,7 +234,7 @@
 				135EAB432A54BDD300152EF8 /* Preview Assets.xcassets in Resources */,
 				135EAB402A54BDD300152EF8 /* Assets.xcassets in Resources */,
 				135EAB692A54BE6F00152EF8 /* Info.plist in Resources */,
-				132EFFFF2A55E45000619379 /* chat.db in Resources */,
+				132E00012A55ED9400619379 /* chat.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

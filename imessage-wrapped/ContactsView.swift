@@ -13,7 +13,6 @@ struct ContactWithMessageCount {
     var messageCount: String
 }
 
-
 class ContactsViewModel: ObservableObject {
     @Published var contacts: [ContactWithMessageCount] = []
     let db = Database()
@@ -25,7 +24,7 @@ class ContactsViewModel: ObservableObject {
     func loadContacts() {
         DispatchQueue.global().async {
             let store = CNContactStore()
-            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey] as [CNKeyDescriptor]
             let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
 
             do {
@@ -62,11 +61,19 @@ struct ContactsView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 16)], spacing: 16) {
                     ForEach(viewModel.contacts, id: \.contact.identifier) { contact in
                         VStack(spacing: 8) {
-                            Image(systemName: "person.crop.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 80, height: 80)
-                                .foregroundColor(.blue)
+                            if let imageData = contact.contact.imageData, let image = NSImage(data: imageData) {
+                                Image(nsImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                            } else {
+                                Image(systemName: "person.crop.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 80, height: 80)
+                                    .foregroundColor(.blue)
+                            }
                             Text("\(contact.contact.givenName) \(contact.contact.familyName)")
                                 .font(.headline)
                             Text("\(contact.messageCount)")
@@ -83,10 +90,9 @@ struct ContactsView: View {
             .padding(.horizontal)
             .padding(.top, 16)
         }
-        .navigationTitle("Contacts")
+        .navigationTitle("iMessage Wrapped")
         .onAppear {
             viewModel.loadContacts()
         }
     }
 }
-
