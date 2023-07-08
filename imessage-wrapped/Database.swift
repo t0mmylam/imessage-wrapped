@@ -11,8 +11,14 @@ import SQLite
 
 class Database {
     static let shared = Database()
-    let db: Connection?
+    let db: Connection
     var dbPath: URL
+    
+    // Define the table object
+    let chat = Table("chat")
+
+    // Define the column expression
+    let chatIdentifier = Expression<String>("chat_identifier")
     
     init() {
         if (!development) {
@@ -40,5 +46,28 @@ class Database {
     
     public func printDbPath() {
         print(dbPath)
+    }
+    
+    public func getMessageCount(number: String) -> String {
+        let rawQuery = """
+            SELECT COUNT(chat.chat_identifier) AS message_count
+            FROM chat
+            JOIN chat_message_join ON chat.ROWID = chat_message_join.chat_id
+            JOIN message ON chat_message_join.message_id = message.ROWID
+            WHERE chat.chat_identifier = '\(number)'
+            GROUP BY chat.chat_identifier;
+            """
+
+        do {
+            for row in try db.prepare(rawQuery) {
+                if let count = row[0] as? Int64 {
+                    // print(String(count))
+                    return String(count)
+                }
+            }
+        } catch {
+            print("Query error: \(error)")
+        }
+        return ""
     }
 }
