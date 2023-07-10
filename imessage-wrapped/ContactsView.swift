@@ -8,13 +8,16 @@
 import SwiftUI
 import Contacts
 
-struct ContactWithMessageCount {
+struct Contact {
     let contact: CNContact
     var messageCount: String
+    var sent: String
+    var received: String
+    var lateMessageCount: String
 }
 
 class ContactsViewModel: ObservableObject {
-    @Published var contacts: [ContactWithMessageCount] = []
+    @Published var contacts: [Contact] = []
     let db = Database()
 
     var totalMessageCount: Int {
@@ -30,12 +33,15 @@ class ContactsViewModel: ObservableObject {
             do {
                 try store.enumerateContacts(with: fetchRequest) { (contact, stop) in
                     let phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? ""
-                    let messageCount = self.db.getMessageCount(number: phoneNumber)
+                    let messageCount = self.db.getContactMessageCount(number: phoneNumber)
+                    let sentCount = self.db.getContactSentMessageCount(number: phoneNumber)
+                    let receivedCount = self.db.getContactReceivedMessageCount(number: phoneNumber)
+                    let lateMessageCount = self.db.getContactLateMessageCount(number: phoneNumber)
 
                     if !messageCount.isEmpty {
-                        let contactWithMessageCount = ContactWithMessageCount(contact: contact, messageCount: messageCount)
+                        let contact = Contact(contact: contact, messageCount: messageCount, sent: sentCount, received: receivedCount, lateMessageCount: lateMessageCount)
                         DispatchQueue.main.async {
-                            self.contacts.append(contactWithMessageCount)
+                            self.contacts.append(contact)
                             self.contacts.sort { (contact1, contact2) -> Bool in
                                 return Int(contact1.messageCount) ?? 0 > Int(contact2.messageCount) ?? 0
                             }
@@ -53,47 +59,146 @@ struct ContactsView: View {
     @StateObject private var viewModel = ContactsViewModel()
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                Text("Total Message Count: \(viewModel.totalMessageCount)")
-                    .font(.title)
-                    .fontWeight(.bold)
+        VStack(spacing: 16) {
+            Text("Total Message Count: \(viewModel.totalMessageCount)")
+                .font(.title)
+                .fontWeight(.bold)
 
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 16)], spacing: 16) {
-                    ForEach(viewModel.contacts, id: \.contact.identifier) { contact in
-                        VStack(spacing: 8) {
-                            if let imageData = contact.contact.imageData, let image = NSImage(data: imageData) {
-                                Image(nsImage: image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 80, height: 80)
-                                    .clipShape(Circle())
-                            } else {
-                                Image(systemName: "person.crop.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 80, height: 80)
-                                    .foregroundColor(.blue)
-                            }
-                            Text("\(contact.contact.givenName) \(contact.contact.familyName)")
-                                .font(.headline)
-                            Text("\(contact.messageCount)")
+            HStack(spacing: 10) {
+                if viewModel.contacts.count > 0 {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Top Contacts")
                                 .font(.title2)
                                 .fontWeight(.bold)
+                                .padding(.horizontal)
+                            
+                            ForEach(viewModel.contacts, id: \.contact.identifier) { contact in
+                                HStack(spacing: 16) {
+                                    if let imageData = contact.contact.imageData, let image = NSImage(data: imageData) {
+                                        Image(nsImage: image)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .clipShape(Circle())
+                                    } else {
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .foregroundColor(.blue)
+                                    }
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("\(contact.contact.givenName) \(contact.contact.familyName)")
+                                            .font(.headline)
+                                        Text("\(contact.messageCount)")
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
                         }
                         .padding()
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
                     }
+                    .frame(maxHeight: 400) // Set a maximum height for the card content
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
+                    
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Sent Texts")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .padding(.horizontal)
+                            
+                            ForEach(viewModel.contacts, id: \.contact.identifier) { contact in
+                                HStack(spacing: 16) {
+                                    if let imageData = contact.contact.imageData, let image = NSImage(data: imageData) {
+                                        Image(nsImage: image)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .clipShape(Circle())
+                                    } else {
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .foregroundColor(.blue)
+                                    }
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("\(contact.contact.givenName) \(contact.contact.familyName)")
+                                            .font(.headline)
+                                        Text("\(contact.sent)")
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                        .padding()
+                    }
+                    .frame(maxHeight: 400) // Set a maximum height for the card content
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
+                    
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Received Texts")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .padding(.horizontal)
+                            
+                            ForEach(viewModel.contacts, id: \.contact.identifier) { contact in
+                                HStack(spacing: 16) {
+                                    if let imageData = contact.contact.imageData, let image = NSImage(data: imageData) {
+                                        Image(nsImage: image)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .clipShape(Circle())
+                                    } else {
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .foregroundColor(.blue)
+                                    }
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("\(contact.contact.givenName) \(contact.contact.familyName)")
+                                            .font(.headline)
+                                        Text("\(contact.received)")
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                        .padding()
+                    }
+                    .frame(maxHeight: 400) // Set a maximum height for the card content
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
+                } else {
+                    Text("Loading...")
+                        .font(.headline)
                 }
             }
-            .padding(.horizontal)
-            .padding(.top, 16)
         }
+        .padding(.horizontal)
+        .padding(.top, 16)
         .navigationTitle("iMessage Wrapped")
         .onAppear {
-                viewModel.loadContacts()
+            viewModel.loadContacts()
         }
     }
 }
