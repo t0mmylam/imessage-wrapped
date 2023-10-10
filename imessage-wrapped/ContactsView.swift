@@ -9,6 +9,7 @@ import SwiftUI
 import Contacts
 import Charts
 import AppKit
+import Cocoa
 
 struct Contact {
     let contact: CNContact
@@ -17,15 +18,6 @@ struct Contact {
     var received: String
     var lateMessageCount: String
 }
-
-private var coffeeSales = [
-    (name: "Americano", count: 120),
-    (name: "Cappuccino", count: 234),
-    (name: "Espresso", count: 62),
-    (name: "Latte", count: 625),
-    (name: "Mocha", count: 320),
-    (name: "Affogato", count: 50)
-]
 
 class ContactsViewModel: ObservableObject {
     @Published var contacts: [Contact] = []
@@ -37,6 +29,7 @@ class ContactsViewModel: ObservableObject {
     var totalMessageCount: String = "0"
     var sentMessageCount: String = "0"
     var receivedMessageCount: String = "0"
+    var monthCounts: [String] = []
     
     func loadData() {
         let wordMap = db.getWordMap()
@@ -56,6 +49,8 @@ class ContactsViewModel: ObservableObject {
             // Handle the case where either or both values are nil
             totalMessageCount = "N/A"
         }
+        
+        let monthCounts: [String] = db.getMonthCounts()
     }
     
     func loadContacts() {

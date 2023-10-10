@@ -276,7 +276,6 @@ class Database {
         
         do {
             for row in try db.prepare(rawQuery) {
-                // print(row)
                 if let text = row[0] as? String {
                     if text != "" {
                         map[text, default: 0] += 1
@@ -286,7 +285,33 @@ class Database {
         } catch {
             print("Query error: \(error)")
         }
-        // print(map)
         return map
+    }
+    
+    public func getMonthCounts() -> [String] {
+        var months: [String] = []
+        let rawQuery = """
+                SELECT
+                    strftime('%m', datetime(message.date/1000000000 + strftime("%m", "2001-01-01") ,"unixepoch","localtime")) as month,
+                    COUNT(message.text)
+                FROM
+                    chat
+                    JOIN chat_message_join ON chat. "ROWID" = chat_message_join.chat_id
+                    JOIN message ON chat_message_join.message_id = message. "ROWID"
+                GROUP BY
+                    month;
+                ORDER BY
+                    month;
+                """
+        do {
+            for row in try db.prepare(rawQuery) {
+                if let count = row[1] as? Int64 {
+                    months.append(String(count))
+                }
+            }
+        } catch {
+            print("Query error: \(error)")
+        }
+        return months
     }
 }
