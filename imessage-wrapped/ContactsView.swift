@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Contacts
+import Charts
+import AppKit
 
 struct Contact {
     let contact: CNContact
@@ -15,6 +17,15 @@ struct Contact {
     var received: String
     var lateMessageCount: String
 }
+
+private var coffeeSales = [
+    (name: "Americano", count: 120),
+    (name: "Cappuccino", count: 234),
+    (name: "Espresso", count: 62),
+    (name: "Latte", count: 625),
+    (name: "Mocha", count: 320),
+    (name: "Affogato", count: 50)
+]
 
 class ContactsViewModel: ObservableObject {
     @Published var contacts: [Contact] = []
@@ -33,7 +44,7 @@ class ContactsViewModel: ObservableObject {
         let textMap = db.getTextMap()
         sortedTextMap = textMap.sorted { $0.value > $1.value }
         sortedTextMap = sortedTextMap.filter { !$0.0.isEmpty && $0.0 != "￼" }
-
+        
         averageMessageCount = db.getAverageMessageCount()
         
         sentMessageCount = db.getSentMessageCount()
@@ -83,6 +94,7 @@ struct ContactsView: View {
     
     var body: some View {
         VStack(spacing: 16) {
+            
             // Total and Average Message Count Card
             VStack(spacing: 8) {
                 Image(systemName: "message.fill")
@@ -105,9 +117,8 @@ struct ContactsView: View {
                     .foregroundColor(.gray)
             }
             .padding()
-            .background(Color.white)
+            .background(Color(NSColor.windowBackgroundColor))
             .cornerRadius(10)
-            .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
             
             HStack(spacing: 50) {
                 if viewModel.contacts.count > 0 {
@@ -162,9 +173,8 @@ struct ContactsView: View {
                         .padding()
                     }
                     .frame(maxWidth: 400, maxHeight: 400)
-                    .background(Color.white)
+                    .background(Color(NSColor.windowBackgroundColor))
                     .cornerRadius(10)
-                    .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
                 } else {
                     Text("Loading...")
                         .font(.headline)
@@ -190,13 +200,12 @@ struct ContactsView: View {
                     .padding()
                 }
                 .frame(maxWidth: 200, maxHeight: 400)
-                .background(Color.white)
+                .background(Color(NSColor.windowBackgroundColor))
                 .cornerRadius(10)
-                .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Word Map")
+                        Text("Text Map")
                             .font(.title2)
                             .fontWeight(.bold)
                             .padding(.horizontal)
@@ -207,20 +216,20 @@ struct ContactsView: View {
                                     .font(.headline)
                                 Text("(\(textCount.1) times)")
                                     .font(.subheadline)
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
                     .padding()
                 }
                 .frame(maxWidth: 200, maxHeight: 400)
-                .background(Color.white)
+                .background(Color(NSColor.windowBackgroundColor))
                 .cornerRadius(10)
-                .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
             }
         }
         .padding(.horizontal, 16) // Adjust horizontal padding to make the stack less wide
         .padding(.top, 16)
+        .background(Color(NSColor.controlBackgroundColor))
         .navigationTitle("iMessage Wrapped")
         .onAppear {
             viewModel.loadData()
