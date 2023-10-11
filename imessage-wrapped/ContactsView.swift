@@ -9,7 +9,6 @@ import SwiftUI
 import Contacts
 import Charts
 import AppKit
-import Cocoa
 
 struct Contact {
     let contact: CNContact
@@ -24,6 +23,8 @@ class ContactsViewModel: ObservableObject {
     let db = Database()
     
     var averageMessageCount: String = "0"
+    var averageSentCount: String = "0"
+    var averageReceivedCount: String = "0"
     var sortedWordMap: [(String, Int)] = []
     var sortedTextMap: [(String, Int)] = []
     var totalMessageCount: String = "0"
@@ -38,7 +39,14 @@ class ContactsViewModel: ObservableObject {
         sortedTextMap = textMap.sorted { $0.value > $1.value }
         sortedTextMap = sortedTextMap.filter { !$0.0.isEmpty && $0.0 != "￼" }
         
-        averageMessageCount = db.getAverageMessageCount()
+        averageSentCount = db.getAverageSentCount()
+        averageReceivedCount = db.getAverageReceivedCount()
+        print(averageSentCount)
+        if let doubleSC = Double(averageSentCount), let doubleRC = Double(averageReceivedCount) {
+            averageMessageCount = String(doubleSC + doubleRC)
+        } else {
+            averageMessageCount = "N/A"
+        }
         
         sentMessageCount = db.getSentMessageCount()
         receivedMessageCount = db.getReceivedMessageCount()
@@ -84,36 +92,70 @@ class ContactsViewModel: ObservableObject {
     }
 }
 
+struct MessageStatsCard: View {
+    var icon: String
+    var title: String
+    var count: String
+    var average: String
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.system(size: 48))
+                .foregroundColor(.blue)
+            
+            Text(title)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.primary)
+            
+            Text("\(count)")
+                .font(.largeTitle)
+                .fontWeight(.semibold)
+                .foregroundColor(.primary)
+            
+            Text("Daily Average: \(average)")
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .background(Color(NSColor.windowBackgroundColor))
+        .cornerRadius(10)
+    }
+}
+
 struct ContactsView: View {
     @StateObject private var viewModel = ContactsViewModel()
     
     var body: some View {
         VStack(spacing: 16) {
             
-            // Total and Average Message Count Card
-            VStack(spacing: 8) {
-                Image(systemName: "message.fill")
-                    .font(.system(size: 48))
-                    .foregroundColor(.blue)
-                
-                Text("Total Message Count")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.primary)
-                
-                Text("\(viewModel.totalMessageCount)")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
-                
-                Text("Daily Average: \(viewModel.averageMessageCount)")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.gray)
+            HStack(spacing: 100) {
+                // Total and Average Message Count Card
+                HStack(spacing: 100) {
+                    MessageStatsCard(
+                        icon: "message.fill",
+                        title: "Total Text Count",
+                        count: viewModel.totalMessageCount,
+                        average: viewModel.averageMessageCount
+                    )
+                    
+                    MessageStatsCard(
+                        icon: "arrow.right.circle.fill",
+                        title: "Total Texts Sent",
+                        count: viewModel.sentMessageCount,
+                        average: viewModel.averageSentCount
+                    )
+                    
+                    MessageStatsCard(
+                        icon: "envelope.fill",
+                        title: "Total Texts Received",
+                        count: viewModel.receivedMessageCount,
+                        average: viewModel.averageReceivedCount
+                    )
+                }
             }
-            .padding()
-            .background(Color(NSColor.windowBackgroundColor))
-            .cornerRadius(10)
             
             HStack(spacing: 50) {
                 if viewModel.contacts.count > 0 {
@@ -167,7 +209,7 @@ struct ContactsView: View {
                         }
                         .padding()
                     }
-                    .frame(maxWidth: 400, maxHeight: 400)
+                    .frame(maxWidth: 400, maxHeight: 350)
                     .background(Color(NSColor.windowBackgroundColor))
                     .cornerRadius(10)
                 } else {
@@ -175,51 +217,68 @@ struct ContactsView: View {
                         .font(.headline)
                 }
                 
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Word Map")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
-                        
-                        ForEach(viewModel.sortedWordMap.prefix(10), id: \.0) { wordCount in
-                            HStack {
-                                Text("\(wordCount.0)")
-                                    .font(.headline)
-                                Text("(\(wordCount.1) times)")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                ZStack(alignment: .top) {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Spacer()
+                                .frame(height: 20)
+                            
+                            ForEach(Array(viewModel.sortedWordMap.prefix(50).enumerated()), id: \.1.0) { index, wordCount in
+                                HStack {
+                                    Text("\(index + 1). \(wordCount.0)")
+                                        .font(.headline)
+                                    Text("(\(wordCount.1) times)")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
+                    .frame(maxWidth: 200, maxHeight: 350)
+                    .background(Color(NSColor.windowBackgroundColor))
+                    .cornerRadius(10)
+                    
+                    // Persistent title
+                    Text("Most Texted Words")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding(.horizontal)
+                        .padding(.top, 20)
+                        .background(Color(NSColor.windowBackgroundColor))
+                        .cornerRadius(10)
                 }
-                .frame(maxWidth: 200, maxHeight: 400)
-                .background(Color(NSColor.windowBackgroundColor))
-                .cornerRadius(10)
                 
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Text Map")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
-                        
-                        ForEach(viewModel.sortedTextMap.prefix(10), id: \.0) { textCount in
-                            HStack {
-                                Text("\(textCount.0)")
-                                    .font(.headline)
-                                Text("(\(textCount.1) times)")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                ZStack(alignment: .top) {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Spacer()
+                                .frame(height: 20)
+                            
+                            ForEach(Array(viewModel.sortedTextMap.prefix(50).enumerated()), id: \.1.0) { index, textCount in
+                                HStack {
+                                    Text("\(index + 1). \(textCount.0)")
+                                        .font(.headline)
+                                    Text("(\(textCount.1) times)")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
+                    .frame(maxWidth: 200, maxHeight: 350)
+                    .background(Color(NSColor.windowBackgroundColor))
+                    .cornerRadius(10)
+                    
+                    Text("Most Sent Texts")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding(.horizontal)
+                        .padding(.top, 20)
+                        .background(Color(NSColor.windowBackgroundColor))
+                        .cornerRadius(10)
                 }
-                .frame(maxWidth: 200, maxHeight: 400)
-                .background(Color(NSColor.windowBackgroundColor))
-                .cornerRadius(10)
             }
         }
         .padding(.horizontal, 16) // Adjust horizontal padding to make the stack less wide

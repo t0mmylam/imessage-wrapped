@@ -194,7 +194,7 @@ class Database {
         return ""
     }
     
-    public func getAverageMessageCount() -> String {
+    public func getAverageSentCount() -> String {
         let rawQuery = """
             SELECT AVG(texts_sent) AS average_texts_sent_per_day
             FROM (
@@ -208,6 +208,41 @@ class Database {
                         JOIN message ON chat_message_join.message_id = message.ROWID
                     WHERE
                         message.is_from_me = 1
+                    GROUP BY
+                        message_date, message.ROWID
+                ) AS subquery
+                GROUP BY
+                    message_date
+            ) AS subquery_avg;
+            """
+        do {
+            for row in try db.prepare(rawQuery) {
+                // print(row)
+                if let count = row[0] as? Double {
+                    let formattedCount = String(format: "%.3f", count) // Format the decimal value as needed
+                    return formattedCount
+                }
+            }
+        } catch {
+            print("Query error: \(error)")
+        }
+        return ""
+    }
+    
+    public func getAverageReceivedCount() -> String {
+        let rawQuery = """
+            SELECT AVG(texts_received) AS average_texts_received_per_day
+            FROM (
+                SELECT message_date, COUNT(*) AS texts_received
+                FROM (
+                    SELECT
+                        strftime('%Y-%m-%d', datetime(message.date / 1000000000 + strftime('%s', '2001-01-01'), 'unixepoch', 'localtime')) AS message_date
+                    FROM
+                        chat
+                        JOIN chat_message_join ON chat.ROWID = chat_message_join.chat_id
+                        JOIN message ON chat_message_join.message_id = message.ROWID
+                    WHERE
+                        message.is_from_me = 0
                     GROUP BY
                         message_date, message.ROWID
                 ) AS subquery
