@@ -15,7 +15,6 @@
 		135EAB402A54BDD300152EF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB3F2A54BDD300152EF8 /* Assets.xcassets */; };
 		135EAB432A54BDD300152EF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB422A54BDD300152EF8 /* Preview Assets.xcassets */; };
 		135EAB672A54BE2E00152EF8 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EAB662A54BE2E00152EF8 /* ContactsView.swift */; };
-		135EAB692A54BE6F00152EF8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 135EAB682A54BE6F00152EF8 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,7 +229,6 @@
 			files = (
 				135EAB432A54BDD300152EF8 /* Preview Assets.xcassets in Resources */,
 				135EAB402A54BDD300152EF8 /* Assets.xcassets in Resources */,
-				135EAB692A54BE6F00152EF8 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
