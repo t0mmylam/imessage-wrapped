@@ -84,5 +84,6 @@ struct imessage_wrappedApp: App {
                 }
             }
         }
+        .windowStyle(HiddenTitleBarWindowStyle())
     }
 }

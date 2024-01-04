@@ -19,6 +19,34 @@ struct Contact {
 }
 
 class ContactsViewModel: ObservableObject {
+    func standardizePhoneNumber(_ number: String) -> String {
+        // Remove all characters except digits and the leading plus.
+        let digitsCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+"))
+        let filteredCharacters = number.unicodeScalars.filter { digitsCharacterSet.contains($0) }
+        let filteredNumber = String(String.UnicodeScalarView(filteredCharacters))
+        
+        // Check if the number already contains the plus sign
+        if filteredNumber.hasPrefix("+") {
+            // Number is already in international format
+            return filteredNumber
+        } else {
+            // Assume the number is missing the "+" and prepend it
+            return "+\(filteredNumber)"
+        }
+    }
+    
+    @Published var searchText = ""
+    var filteredContacts: [Contact] {
+        if searchText.isEmpty {
+            return contacts
+        } else {
+            return contacts.filter { contact in
+                contact.contact.givenName.lowercased().contains(searchText.lowercased()) ||
+                contact.contact.familyName.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
+    
     @Published var contacts: [Contact] = []
     let db = Database()
     
@@ -41,9 +69,8 @@ class ContactsViewModel: ObservableObject {
         
         averageSentCount = db.getAverageSentCount()
         averageReceivedCount = db.getAverageReceivedCount()
-        print(averageSentCount)
         if let doubleSC = Double(averageSentCount), let doubleRC = Double(averageReceivedCount) {
-            averageMessageCount = String(doubleSC + doubleRC)
+            averageMessageCount = String(format: "%.3f", doubleSC + doubleRC)
         } else {
             averageMessageCount = "N/A"
         }
@@ -64,12 +91,17 @@ class ContactsViewModel: ObservableObject {
     func loadContacts() {
         DispatchQueue.global().async {
             let store = CNContactStore()
-            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey] as [CNKeyDescriptor]
+            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey, CNContactEmailAddressesKey] as [CNKeyDescriptor]
             let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
             
             do {
                 try store.enumerateContacts(with: fetchRequest) { (contact, stop) in
-                    let phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? ""
+                    var phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? ""
+                    phoneNumber = self.standardizePhoneNumber(phoneNumber)
+                    let email = contact.emailAddresses.first?.value ?? ""
+                    if phoneNumber == "+" {
+                        phoneNumber = email as String
+                    }
                     let messageCount = self.db.getContactMessageCount(number: phoneNumber)
                     let sentCount = self.db.getContactSentMessageCount(number: phoneNumber)
                     let receivedCount = self.db.getContactReceivedMessageCount(number: phoneNumber)
@@ -127,167 +159,142 @@ struct MessageStatsCard: View {
 
 struct ContactsView: View {
     @StateObject private var viewModel = ContactsViewModel()
+    @FocusState private var isFocused: Bool
     
     var body: some View {
-        VStack(spacing: 16) {
+        HStack(alignment: .center, spacing: 0) {
+            VStack(alignment: .leading) {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    TextField("Search Contacts", text: $viewModel.searchText) // Bind TextField to searchText
+                        .foregroundColor(.primary)
+                        .focused($isFocused) // Bind the focus state
+                }
+                .padding(8)
+                .background(Color(NSColor.textBackgroundColor)) // Use UIColor for iOS
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(isFocused ? Color.blue : Color.gray, lineWidth: isFocused ? 2 : 0.5)
+                )
+                .frame(maxWidth: 400)
+                
+                if viewModel.contacts.count > 0 {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            ForEach(viewModel.filteredContacts, id: \.contact.identifier) { contact in
+                                ContactCardView(contact: contact)
+                            }
+                        }
+                        .padding()
+                    }
+                    .frame(maxWidth: 400)
+                    .cornerRadius(10)
+                } else {
+                    Text("Loading...")
+                        .font(.headline)
+                }
+            }
+            .background(Color(NSColor.windowBackgroundColor))
             
-            HStack(spacing: 100) {
-                // Total and Average Message Count Card
-                HStack(spacing: 100) {
+            VStack() {
+                HStack(spacing: 0) {
                     MessageStatsCard(
                         icon: "message.fill",
-                        title: "Total Text Count",
+                        title: "Total",
                         count: viewModel.totalMessageCount,
                         average: viewModel.averageMessageCount
                     )
                     
                     MessageStatsCard(
                         icon: "arrow.right.circle.fill",
-                        title: "Total Texts Sent",
+                        title: "Sent",
                         count: viewModel.sentMessageCount,
                         average: viewModel.averageSentCount
                     )
                     
                     MessageStatsCard(
                         icon: "envelope.fill",
-                        title: "Total Texts Received",
+                        title: "Received",
                         count: viewModel.receivedMessageCount,
                         average: viewModel.averageReceivedCount
                     )
                 }
-            }
-            
-            HStack(spacing: 50) {
-                if viewModel.contacts.count > 0 {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 16) {
-                            // Top Contacts
-                            Text("Top Contacts")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .padding(.horizontal)
-                            
-                            ForEach(viewModel.contacts, id: \.contact.identifier) { contact in
-                                // Contact Card
-                                HStack(spacing: 16) {
-                                    if let imageData = contact.contact.imageData, let image = NSImage(data: imageData) {
-                                        Image(nsImage: image)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 40, height: 40)
-                                            .clipShape(Circle())
-                                    } else {
-                                        Image(systemName: "person.crop.circle.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 40, height: 40)
-                                            .foregroundColor(.blue)
-                                    }
-                                    
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("\(contact.contact.givenName) \(contact.contact.familyName)")
+                
+                HStack(spacing: 10) {
+                    ZStack(alignment: .top) {
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 16) {
+                                Spacer()
+                                    .frame(height: 20)
+                                
+                                ForEach(Array(viewModel.sortedWordMap.prefix(50).enumerated()), id: \.1.0) { index, wordCount in
+                                    HStack {
+                                        Text("\(index + 1). \(wordCount.0)")
                                             .font(.headline)
-                                        Text("\(contact.messageCount)")
-                                            .font(.subheadline)
-                                            .fontWeight(.semibold) // Adjust font weight for the total texts
-                                            .foregroundColor(.gray)
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    VStack(alignment: .trailing, spacing: 4) {
-                                        Text("Sent: \(contact.sent)")
-                                            .font(.subheadline)
-                                            .foregroundColor(.gray)
-                                        Text("Received: \(contact.received)")
+                                        Text("(\(wordCount.1) times)")
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     }
                                 }
-                                .padding(.horizontal)
                             }
+                            .padding()
                         }
-                        .padding()
-                    }
-                    .frame(maxWidth: 400, maxHeight: 350)
-                    .background(Color(NSColor.windowBackgroundColor))
-                    .cornerRadius(10)
-                } else {
-                    Text("Loading...")
-                        .font(.headline)
-                }
-                
-                ZStack(alignment: .top) {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Spacer()
-                                .frame(height: 20)
-                            
-                            ForEach(Array(viewModel.sortedWordMap.prefix(50).enumerated()), id: \.1.0) { index, wordCount in
-                                HStack {
-                                    Text("\(index + 1). \(wordCount.0)")
-                                        .font(.headline)
-                                    Text("(\(wordCount.1) times)")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                        }
-                        .padding()
-                    }
-                    .frame(maxWidth: 200, maxHeight: 350)
-                    .background(Color(NSColor.windowBackgroundColor))
-                    .cornerRadius(10)
-                    
-                    // Persistent title
-                    Text("Most Texted Words")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.horizontal)
-                        .padding(.top, 20)
+                        .frame(maxWidth: 200, maxHeight: 350)
                         .background(Color(NSColor.windowBackgroundColor))
                         .cornerRadius(10)
-                }
-                
-                ZStack(alignment: .top) {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Spacer()
-                                .frame(height: 20)
-                            
-                            ForEach(Array(viewModel.sortedTextMap.prefix(50).enumerated()), id: \.1.0) { index, textCount in
-                                HStack {
-                                    Text("\(index + 1). \(textCount.0)")
-                                        .font(.headline)
-                                    Text("(\(textCount.1) times)")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
+                        
+                        // Persistent title
+                        Text("Most Texted Words")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.horizontal)
+                            .padding(.top, 20)
+                            .background(Color(NSColor.windowBackgroundColor))
+                            .cornerRadius(10)
+                    }
+                    
+                    ZStack(alignment: .top) {
+                        ScrollView {
+                            VStack(alignment: .leading, spacing: 16) {
+                                Spacer()
+                                    .frame(height: 20)
+                                
+                                ForEach(Array(viewModel.sortedTextMap.prefix(50).enumerated()), id: \.1.0) { index, textCount in
+                                    HStack {
+                                        Text("\(index + 1). \(textCount.0)")
+                                            .font(.headline)
+                                        Text("(\(textCount.1) times)")
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
                                 }
                             }
+                            .padding()
                         }
-                        .padding()
-                    }
-                    .frame(maxWidth: 200, maxHeight: 350)
-                    .background(Color(NSColor.windowBackgroundColor))
-                    .cornerRadius(10)
-                    
-                    Text("Most Sent Texts")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.horizontal)
-                        .padding(.top, 20)
+                        .frame(maxWidth: 200, maxHeight: 350)
                         .background(Color(NSColor.windowBackgroundColor))
                         .cornerRadius(10)
+                        
+                        Text("Most Sent Texts")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.horizontal)
+                            .padding(.top, 20)
+                            .background(Color(NSColor.windowBackgroundColor))
+                            .cornerRadius(10)
+                    }
                 }
             }
+            .navigationTitle("iMessage Wrapped")
+            .border(.blue)
+            .padding(0)
+            .onAppear {
+                viewModel.loadData()
+                viewModel.loadContacts()
+            }
         }
-        .padding(.horizontal, 16) // Adjust horizontal padding to make the stack less wide
-        .padding(.top, 16)
-        .background(Color(NSColor.controlBackgroundColor))
-        .navigationTitle("iMessage Wrapped")
-        .onAppear {
-            viewModel.loadData()
-            viewModel.loadContacts()
-        }
+        .frame(maxWidth: .infinity)
     }
 }

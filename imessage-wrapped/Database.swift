@@ -44,10 +44,6 @@ class Database {
         }
     }
     
-    public func printDbPath() {
-        print(dbPath)
-    }
-    
     public func getSentMessageCount() -> String {
         let rawQuery = """
             SELECT
@@ -137,14 +133,13 @@ class Database {
         do {
             for row in try db.prepare(rawQuery) {
                 if let count = row[0] as? Int64 {
-                    // print(String(count))
                     return String(count)
                 }
             }
         } catch {
             print("Query error: \(error)")
         }
-        return ""
+        return "0"
     }
     
     public func getContactReceivedMessageCount(number: String) -> String {
@@ -168,7 +163,7 @@ class Database {
         } catch {
             print("Query error: \(error)")
         }
-        return ""
+        return "0"
     }
     
     public func getContactLateMessageCount(number: String) -> String {
